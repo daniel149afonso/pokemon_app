@@ -1,37 +1,50 @@
-//const { createElement } = require("react");
-
+//GET POKEMON URL
 const url = "https://pokeapi.co/api/v2/pokemon/";
-let nameInput = document.querySelector("#name");
 
+//GET INPUT NAME + BUTTON
+let pokemon = document.querySelector("#input");
 let button = document.querySelector("#search");
 
+//POKEMON INFOS
+let namePoke = document.querySelector("#name");
+let typePoke = document.querySelector("#type");
+let weakPoke = document.querySelector("#weakness");
+let sprite = document.querySelector("#sprite");
+
+//CLICK SEARCH POKEMON
 button.addEventListener("click", ()=>{
-	const apiKey = url + nameInput.value;
-	getPokemon(apiKey);
+	//Add pokemon name to url
+	const apiKey = url + pokemon.value;
+	getPokemonInfos(apiKey);
 });
 
-async function getPokemon(apiKey){
+async function getPokemonInfos(apiKey){
 	try{
 		const response = await fetch(apiKey);
 		if (!response.ok){
 			throw new Error("Pokemon not found !");
 		}
 		const data = await response.json();
-		displaySprite(data);
-		alert("Your value: "+ data.name);
+		displayName(data);
+		//displaySprite(data);
 		console.log(data);
 	} catch(error){
-		alert(error);
+		console.log(error);
 	}
 }
 
-function displaySprite(data){
-	let sprite = document.createElement("img");
-	sprite.document.sr
-	document.body.append(sprite);
-
+function displayName(data){
+	namePoke.textContent += data.name;
+	typePoke.textContent += data.types[0].type.name;
+	if (data.types[1])
+		typePoke.textContent += ", " + data.types[1].type.name;
 }
 
+function displaySprite(data){
+	
+	sprite.src = img;
+
+}
 
 
 // button.addEventListener("click", ()=>{

@@ -6,6 +6,7 @@ let pokemon = document.querySelector("#input");
 let button = document.querySelector("#search");
 
 //POKEMON INFOS
+let numberPoke = document.querySelector("#number");
 let namePoke = document.querySelector("#name");
 let typePoke = document.querySelector("#type");
 let weakPoke = document.querySelector("#weakness");
@@ -13,6 +14,10 @@ let sprite = document.querySelector("#sprite");
 
 //CLICK SEARCH POKEMON
 button.addEventListener("click", ()=>{
+	//Delete input
+	numberPoke.textContent = "Number: ";
+	namePoke.textContent = "Name: ";
+	typePoke.textContent = "Type: ";
 	//Add pokemon name to url
 	const apiKey = url + pokemon.value;
 	getPokemonInfos(apiKey);
@@ -25,15 +30,16 @@ async function getPokemonInfos(apiKey){
 			throw new Error("Pokemon not found !");
 		}
 		const data = await response.json();
-		displayName(data);
-		//displaySprite(data);
+		displayInfos(data);
+		displaySprite(data);
 		console.log(data);
 	} catch(error){
 		console.log(error);
 	}
 }
 
-function displayName(data){
+function displayInfos(data){
+	numberPoke.textContent += data.id;
 	namePoke.textContent += data.name;
 	typePoke.textContent += data.types[0].type.name;
 	if (data.types[1])
@@ -42,7 +48,7 @@ function displayName(data){
 
 function displaySprite(data){
 	
-	sprite.src = img;
+	sprite.src = data.sprites.back_default;
 
 }
 
@@ -56,6 +62,8 @@ function displaySprite(data){
 // 	.catch(error => console.log("Error: " + error));
 // });
 
+
+
 // let title;
 // let promise = new Promise((resolve, reject)=>{
 // 	title = document.createElement("h1");
@@ -65,7 +73,7 @@ function displaySprite(data){
 // promise.then(
 // 	value => title.textContent = value,
 // 	error => alert(error)
-// )
+// );
 
 // let promise = new Promise((resolve, reject)=>{
 // 	setTimeout(() => resolve("Fini!"), 1000);

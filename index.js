@@ -1,3 +1,6 @@
+import age from './test.js'
+console.log(age);
+
 //GET POKEMON URL
 const url = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -34,7 +37,7 @@ async function getPokemonInfos(apiKey){
 		displaySprite(data);
 		console.log(data);
 	} catch(error){
-		console.log(error);
+		alert(error);
 	}
 }
 
@@ -52,7 +55,7 @@ function displaySprite(data){
 
 }
 
-
+//FETCH
 // button.addEventListener("click", ()=>{
 // 	let name = nameInput.value;
 // 	const apiKey = url + name;
@@ -63,7 +66,7 @@ function displaySprite(data){
 // });
 
 
-
+//PROMISES
 // let title;
 // let promise = new Promise((resolve, reject)=>{
 // 	title = document.createElement("h1");
@@ -75,6 +78,7 @@ function displaySprite(data){
 // 	error => alert(error)
 // );
 
+//PROMISES + SETTIMEOUT
 // let promise = new Promise((resolve, reject)=>{
 // 	setTimeout(() => resolve("Fini!"), 1000);
 // });

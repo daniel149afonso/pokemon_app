@@ -50,9 +50,7 @@ function displayInfos(data){
 }
 
 function displaySprite(data){
-	
-	sprite.src = data.sprites.back_default;
-
+	sprite.src = data.sprites.front_default;
 }
 
 //FETCH

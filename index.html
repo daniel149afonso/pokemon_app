@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Pokémon Search</title>
 	<script src="https://cdn.tailwindcss.com"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
-<body>
-	<!--SEARCH POKEMON---------------------->
-	<input type="text" name="name" id="input">
-	<button id="search" type="submit" >search</button> <br>
-	<!--POKEMON INFOS----------------------------->
-	<div id="infos">
-		<img id="sprite"src="" alt="">
-		<p id="number">Number: </p>
-		<p id="name">Name: </p>
-		<p id="type">Type: </p>
-		<p id="weakness">Weakness: </p>
-		<p id ="desc"></p>
+<body class="bg-gradient-to-b from-yellow-100 via-white to-blue-100 min-h-screen flex flex-col items-center justify-start p-8">
 
+	<header class="w-full max-w-md bg-white shadow-md rounded-xl p-6 mb-6">
+	<h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Find your  Pokemon !</h1>
+	<div class="flex gap-2">
+		<input type="text" name="name" id="input" placeholder="ex: pikachu"
+		class="flex-1 p-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+	  <button id="search" type="submit"
+		class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md transition-colors">
+		Search
+	  </button>
 	</div>
-	<script type="module" src="index.js"></script>
+  </header>
+
+  <div id="infos" class="w-full max-w-md bg-white shadow-md rounded-xl p-6 text-center">
+	<p id="number" class="text-gray-700 text-lg font-semibold mb-2">Number: </p>
+	<p id="name" class="text-gray-800 text-2xl font-bold mb-4">Name: </p>
+
+	<div id="image" class="flex justify-center mb-4">
+	  <img id="sprite" src="" alt="Pokemon" class="w-32 h-32 object-contain" />
+	</div>
+
+	<p id="type" class="text-blue-600 font-semibold mb-2">Type: </p>
+	<p id="weakness" class="text-red-600 font-semibold mb-2">Weakness: </p>
+	<p id="desc" class="text-gray-600 mt-4 italic text-sm"></p>
+  </div>
+
+  <script type="module" src="index.js"></script>
 </body>
 </html>

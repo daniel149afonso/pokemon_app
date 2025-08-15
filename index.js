@@ -3,6 +3,7 @@ console.log(age);
 
 //GET POKEMON URL
 const url = "https://pokeapi.co/api/v2/pokemon/";
+const urlType = "https://pokeapi.co/api/v2/type/";
 
 //GET INPUT NAME + BUTTON
 let pokemon = document.querySelector("#input");
@@ -33,13 +34,41 @@ async function getPokemonInfos(apiKey){
 			throw new Error("Pokemon not found !");
 		}
 		const data = await response.json();
+		await getWeaknesses(data.types);
 		displayInfos(data);
 		displaySprite(data);
 		console.log(data);
 	} catch(error){
-		alert(error);
+		let errorPoke = document.createElement("div");
+		errorPoke.classList.add("error");
+		errorPoke.textContent = error;
+		document.body.append(errorPoke);
 	}
 }
+
+async function getWeaknesses(types) {
+	try {
+	const typeUrls = types.map(t => t.type.url); // récupère les URLs des types
+
+	// Lance toutes les requêtes en parallèle
+	const responses = await Promise.all(typeUrls.map(url => fetch(url)));
+	const datas = await Promise.all(responses.map(res => res.json()));
+
+	// Récupère toutes les faiblesses
+	let allWeaknesses = datas.flatMap(typeData =>
+		typeData.damage_relations.double_damage_from.map(t => t.name)
+	);
+
+	// Supprime les doublons
+	const uniqueWeaknesses = [...new Set(allWeaknesses)];
+
+	// Affiche dans la page
+	weakPoke.textContent = "Weakness: " + uniqueWeaknesses.join(", ");
+	} catch (error) {
+	console.error("Erreur lors du chargement des faiblesses :", error);
+	}
+}
+
 
 function displayInfos(data){
 	numberPoke.textContent += data.id;

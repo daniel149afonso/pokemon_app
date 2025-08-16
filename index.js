@@ -69,7 +69,6 @@ async function getWeaknesses(types) {
 	}
 }
 
-
 function displayInfos(data){
 	numberPoke.textContent += data.id;
 	namePoke.textContent += data.name;

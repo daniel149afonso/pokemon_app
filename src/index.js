@@ -1,6 +1,3 @@
-import age from './test.js'
-console.log(age);
-
 //GET POKEMON URL
 const url = "https://pokeapi.co/api/v2/pokemon/";
 const urlType = "https://pokeapi.co/api/v2/type/";
@@ -8,6 +5,7 @@ const urlType = "https://pokeapi.co/api/v2/type/";
 //GET INPUT NAME + BUTTON
 let pokemon = document.querySelector("#input");
 let button = document.querySelector("#search");
+let errorPoke = document.querySelector("#error");
 
 //POKEMON INFOS
 let numberPoke = document.querySelector("#number");
@@ -29,20 +27,25 @@ button.addEventListener("click", ()=>{
 
 async function getPokemonInfos(apiKey){
 	try{
+		if (!pokemon.value){
+			throw new Error("Please enter a Pokemon name !");
+		}
 		const response = await fetch(apiKey);
 		if (!response.ok){
 			throw new Error("Pokemon not found !");
 		}
+		errorPoke.textContent = " ";
 		const data = await response.json();
 		await getWeaknesses(data.types);
 		displayInfos(data);
 		displaySprite(data);
 		console.log(data);
 	} catch(error){
-		let errorPoke = document.createElement("div");
+		errorPoke = document.querySelector("#error");
 		errorPoke.classList.add("error");
 		errorPoke.textContent = error;
-		document.body.append(errorPoke);
+		sprite.src = "";
+		weakPoke = "";
 	}
 }
 

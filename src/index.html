@@ -1,39 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>Pokémon Search</title>
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokemon Search</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gradient-to-b from-yellow-100 via-white to-blue-100 min-h-screen flex flex-col items-center justify-start p-8">
+<body class="min-h-screen bg-gradient-to-br from-yellow-100 via-white to-blue-100 flex items-center justify-center p-6">
 
-	<header class="w-full max-w-md bg-white shadow-md rounded-xl p-6 mb-6">
-	<h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Find your  Pokemon !</h1>
-	<div class="flex gap-2">
-		<input type="text" name="name" id="input" placeholder="pikachu"
-		class="flex-1 p-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-	  <button id="search" type="submit"
-		class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md transition-colors">
-		Search
-	  </button>
+  <main class="w-full max-w-lg">
+	<section class="bg-white/90 backdrop-blur shadow-xl rounded-3xl p-6 md:p-8 border border-white/60 hover:shadow-2xl transition-shadow duration-300">
+	  <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-2">
+		Pokemon Finder
+	  </h1>
+	  <p class="text-center text-gray-500 mb-6">
+		Search a Pokemon by name
+	  </p>
+
+	<div class="flex gap-2 mb-4">
+		<input
+			type="text"
+			name="name"
+			id="input"
+			placeholder="pikachu"
+			class="flex-1 rounded-xl border border-gray-300 px-4 py-3 outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
+		<button
+			id="search"
+			type="button"
+			class="rounded-xl bg-yellow-400 px-5 py-3 font-semibold text-white shadow hover:bg-yellow-500 active:scale-[0.98] transition"
+		>
+			Search
+		</button>
 	</div>
-  </header>
 
-  <div id="infos" class="w-full max-w-md bg-white shadow-md rounded-xl p-6 text-center">
-	<p id="number" class="text-gray-700 text-lg font-semibold mb-2">Number: </p>
-	<p id="name" class="text-gray-800 text-2xl font-bold mb-4">Name: </p>
+	<p id="error" class="min-h-[24px] text-sm font-medium text-red-500 text-center mb-4"></p>
 
-	<div id="image" class="flex justify-center mb-4">
-	  <img id="sprite" src="" alt="Pokemon" class="w-32 h-32 object-contain" />
-	</div>
+		<div id="infos" class="rounded-2xl bg-slate-50 p-6 border border-slate-200">
+			<div class="flex justify-between items-start mb-4">
+				<p id="number" class="text-sm font-semibold text-gray-500">Number:</p>
+			</div>
 
-	<p id="type" class="text-blue-600 font-semibold mb-2">Type: </p>
-	<p id="weakness" class="text-red-600 font-semibold mb-2">Weakness: </p>
-	<p id="desc" class="text-gray-600 mt-4 italic text-sm"></p>
-	<p id="error"></p>
-</div>
+			<div class="flex justify-center mb-4">
+				<div class="pokemon-image-wrapper">
+				<img id="sprite" src="" alt="Pokemon" class="w-40 h-40 object-contain drop-shadow-lg" />
+				</div>
+			</div>
+
+			<p id="name" class="text-3xl font-extrabold text-center text-gray-800 mb-4"></p>
+
+			<p class="font-semibold mb-2 text-center">Type:</p>
+			<div id="types" class="flex flex-wrap justify-center gap-2 mb-4"></div>
+
+			<p class="font-semibold mb-2 text-center">Weakness:</p>
+			<div id="weakness" class="flex flex-wrap justify-center gap-2"></div>
+
+			<p id="desc" class="text-center text-sm text-gray-500 mt-4"></p>
+			<p id="error" class="text-center text-sm text-red-500 mt-4"></p>
+		</div>
+	</section>
+  </main>
 
   <script type="module" src="index.js"></script>
 </body>

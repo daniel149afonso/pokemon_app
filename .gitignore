@@ -1,4 +1,4 @@
 *.txt
 *.json
 node_modules
-test.js
+README_map.md

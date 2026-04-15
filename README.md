@@ -3,6 +3,8 @@
 A simple web app to search for Pokemon and display their information using the [PokeAPI](https://pokeapi.co/).  
 Built with **vanilla JavaScript**, styled using **Tailwind CSS**, and includes **autocomplete** search functionality.
 
+<img width="790" height="721" alt="image" src="https://github.com/user-attachments/assets/a5870239-606d-48cc-832b-4988143db8c8" />
+
 ---
 
 ## 🌐 Features

@@ -34,3 +34,24 @@ Built with **vanilla JavaScript**, styled using **Tailwind CSS**, and includes *
    git clone https://github.com/daniel149afonso/pokemon_app.git
    cd pokemon_app
    ```
+
+## Tree
+
+```bash
+ pokemon_app/
+  ├── src/                    ← tout le code source
+  │   ├── index.html          ← la page web
+  │   ├── css/style.css       ← les styles custom
+  │   ├── ts/                 ← le code TypeScript (logique de l'app)
+  │   │   ├── index.ts        ← logique principale
+  │   │   └── data.ts         ← données statiques (couleurs des types)
+  │   └── public/
+  │       └── pokeball.svg    ← image par défaut
+  │
+  ├── dist/                   ← version finale compilée (générée par `npm run build`)
+  ├── node_modules/           ← dépendances installées (ignoré par git)
+  │
+  ├── package.json            ← liste les dépendances et les commandes
+  ├── tsconfig.json           ← configuration TypeScript
+  └── vite.config.ts          ← configuration Vite (le bundler)
+  ```

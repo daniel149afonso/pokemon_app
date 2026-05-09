@@ -32,10 +32,13 @@ interface DamageRelation {
 interface TypeData {
   damage_relations: {
     double_damage_from: DamageRelation[];
+    half_damage_from: DamageRelation[];
+    no_damage_from: DamageRelation[];
   };
 }
 
 const API_URL = "https://pokeapi.co/api/v2/pokemon/";
+const PLACEHOLDER = "/pokeball.svg";
 
 const pokemon = document.querySelector<HTMLInputElement>("#input")!;
 const button = document.querySelector<HTMLButtonElement>("#search")!;
@@ -46,6 +49,8 @@ const namePoke = document.querySelector<HTMLParagraphElement>("#name")!;
 const typePoke = document.querySelector<HTMLDivElement>("#types")!;
 const weakPoke = document.querySelector<HTMLDivElement>("#weakness")!;
 const sprite = document.querySelector<HTMLImageElement>("#sprite")!;
+
+sprite.src = PLACEHOLDER;
 
 button.addEventListener("click", () => {
   resetCard();
@@ -67,7 +72,7 @@ function resetCard(): void {
   typePoke.innerHTML = "";
   weakPoke.innerHTML = "";
   errorPoke.textContent = "";
-  sprite.src = "";
+  sprite.src = PLACEHOLDER;
 }
 
 async function getPokemonInfos(apiKey: string): Promise<void> {
@@ -90,8 +95,8 @@ async function getPokemonInfos(apiKey: string): Promise<void> {
 
   } catch (error) {
     errorPoke.textContent = (error as Error).message;
-    sprite.src = "";
-    weakPoke.textContent = "Weakness:";
+    sprite.src = PLACEHOLDER;
+    weakPoke.innerHTML = "";
   }
 }
 
@@ -102,13 +107,25 @@ async function getWeaknesses(types: PokemonType[]): Promise<void> {
     const responses = await Promise.all(typeUrls.map(url => fetch(url)));
     const datas: TypeData[] = await Promise.all(responses.map(res => res.json()));
 
-    const allWeaknesses = datas.flatMap(typeData =>
-      typeData.damage_relations.double_damage_from.map(t => t.name)
-    );
+    const multipliers: Record<string, number> = {};
 
-    const uniqueWeaknesses = [...new Set(allWeaknesses)];
+    for (const typeData of datas) {
+      for (const t of typeData.damage_relations.double_damage_from) {
+        multipliers[t.name] = (multipliers[t.name] ?? 1) * 2;
+      }
+      for (const t of typeData.damage_relations.half_damage_from) {
+        multipliers[t.name] = (multipliers[t.name] ?? 1) * 0.5;
+      }
+      for (const t of typeData.damage_relations.no_damage_from) {
+        multipliers[t.name] = 0;
+      }
+    }
 
-    weakPoke.innerHTML = uniqueWeaknesses.map(type =>
+    const weaknesses = Object.entries(multipliers)
+      .filter(([, mult]) => mult >= 2)
+      .map(([type]) => type);
+
+    weakPoke.innerHTML = weaknesses.map(type =>
       `<span class="badge ${typeColors[type] ?? 'bg-gray-400'}">${type}</span>`
     ).join("");
   } catch (error) {
@@ -133,5 +150,6 @@ function displayInfos(data: Pokemon): void {
 function displaySprite(data: Pokemon): void {
   sprite.src =
     data.sprites.other["official-artwork"].front_default ||
-    data.sprites.front_default;
+    data.sprites.front_default ||
+    PLACEHOLDER;
 }

@@ -1,4 +1,4 @@
-export  const typeColors = {
+export const typeColors: Record<string, string> = {
   fire: "bg-red-500",
   water: "bg-blue-500",
   grass: "bg-green-500",

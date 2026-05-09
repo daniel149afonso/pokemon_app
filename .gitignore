@@ -1,4 +1,5 @@
 *.txt
-*.json
 node_modules
 README_map.md
+dist
+.claude

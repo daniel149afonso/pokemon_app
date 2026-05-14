@@ -1,7 +1,7 @@
 # 🔍 Pokemon Finder
 
 A simple web app to search for Pokemon and display their information using the [PokeAPI](https://pokeapi.co/).  
-Built with **vanilla JavaScript**, styled using **Tailwind CSS**, and includes **autocomplete** search functionality.
+Built with **TypeScript**, styled using **Tailwind CSS**, and includes **autocomplete** search functionality.
 
 <img width="1382" height="1193" alt="image" src="https://github.com/user-attachments/assets/d28ce9a0-e9f8-4df0-802e-d882bedbdab2" />
 
@@ -20,7 +20,7 @@ Built with **vanilla JavaScript**, styled using **Tailwind CSS**, and includes *
 
 ## 📦 Technologies Used
 
-- **JavaScript** (no framework)
+- **TypeScript** (no framework)
 - **Tailwind CSS** (via CDN)
 - **PokéAPI** – for Pokemon data
 
